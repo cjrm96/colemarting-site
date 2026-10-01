@@ -1,27 +1,11 @@
 (function () {
   var FORM_ID = "350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6";
   var takeover = document.getElementById("takeover");
-  var content = document.getElementById("content");
-
-  function measure() {
-    if (!content) return;
-    if (!takeover || takeover.hidden) {
-      content.style.marginTop = "0px";
-      return;
-    }
-    content.style.marginTop = takeover.offsetHeight + "px";
-  }
-
-  if (takeover) {
-    measure();
-    window.addEventListener("resize", measure);
-    var close = document.getElementById("takeover-close");
-    if (close) {
-      close.addEventListener("click", function () {
-        takeover.hidden = true;
-        measure();
-      });
-    }
+  var close = document.getElementById("takeover-close");
+  if (takeover && close) {
+    close.addEventListener("click", function () {
+      takeover.hidden = true;
+    });
   }
 
   function shapeForm() {

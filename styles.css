@@ -45,10 +45,7 @@ button:not(:disabled) { cursor: pointer; }
 }
 
 .takeover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   color: #fff;
   overflow: hidden;
   z-index: 20;
