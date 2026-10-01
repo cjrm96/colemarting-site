@@ -3,42 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cole Marting — North County Fire Protection District</title>
-  <meta name="description" content="Updates from Cole Marting, North County Fire Protection District.">
+  <title>Cole Marting for North County Fire Protection District</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="bar">
-    <a class="wordmark" href="index.html">Cole Marting</a>
-    <nav>
-      <a href="updates.html">Updates</a>
-      <a class="nav-donate" href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today">Donate</a>
-    </nav>
+  <div class="gate" id="gate" role="dialog" aria-label="Donate">
+    <div class="card">
+      <button class="close" type="button" id="close">Close</button>
+      <h2>Support Cole</h2>
+      <p>Chip in to keep the district updates and the work going. Every gift stays with the committee while it is open.</p>
+      <div class="amounts">
+        <a href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today?amount=10">$10</a>
+        <a href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today?amount=25">$25</a>
+        <a href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today?amount=100">$100</a>
+        <a href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today?amount=250">$250</a>
+        <a href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today?amount=500">$500</a>
+        <a class="other" href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today">Other amount</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="index.html">Cole Marting</a>
+    <a class="donate-nav" href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today">Donate</a>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">North County Fire Protection District</p>
-        <h1>Cole Marting<em>District updates, straight to you.</em></h1>
-        <p class="lede">No account. No app. Name, email, and — if you want texts — a mobile number.</p>
-
-        <div class="form-slot" id="join">
-          <script async src="https://eomail5.com/form/350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6.js" data-form="350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6"></script>
-        </div>
-        <p class="consent">By giving your mobile number you agree to recurring campaign texts from Cole Marting. Message and data rates may apply. Reply STOP to end, HELP for help. <a href="privacy.html">Privacy</a>.</p>
-
-        <p class="donate"><a class="btn" href="https://secure.winred.com/cole-marting-for-north-county-fire-protection-district-2026/donate-today">Donate</a></p>
-      </div>
-    </section>
+  <main class="stage">
+    <h1>North County<br>is worth<br>protecting</h1>
+    <p class="sub">Cole Marting. North County Fire Protection District. Get the updates.</p>
+    <div class="form-slot" id="join">
+      <script async src="https://eomail5.com/form/350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6.js" data-form="350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6"></script>
+    </div>
+    <p class="consent">By providing your phone number you agree to recurring campaign texts from Cole Marting. Message frequency varies. Message and data rates may apply. Reply STOP to end, HELP for help. Mobile information is not sold. <a href="privacy.html">Privacy</a>.</p>
   </main>
 
   <footer>
     <p>Paid for by Cole Marting for North County Fire Protection District 2026. FPPC ID #1479857.</p>
-    <p><a href="privacy.html">Privacy</a> · <a href="updates.html">Updates</a></p>
   </footer>
+  <script>
+    document.getElementById('close').addEventListener('click', function () {
+      document.getElementById('gate').hidden = true;
+    });
+  </script>
 </body>
 </html>
