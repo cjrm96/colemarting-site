@@ -2,9 +2,33 @@
   var FORM_ID = "350bb96e-bde6-11f1-ae1f-fb1fa2bef3a6";
   var takeover = document.getElementById("takeover");
   var close = document.getElementById("takeover-close");
+  var content = document.getElementById("content");
+  if (takeover) {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var opened = false;
+    var roll = function (h) {
+      takeover.style.maxHeight = h + "px";
+      if (content) content.style.marginTop = h + "px";
+    };
+    var measure = function () {
+      var inner = takeover.querySelector(".takeover__inner");
+      return inner ? inner.offsetHeight : 0;
+    };
+    window.setTimeout(function () {
+      opened = true;
+      roll(measure());
+    }, reduce ? 0 : 500);
+    window.addEventListener("resize", function () {
+      if (opened && !takeover.hidden) roll(measure());
+    });
+  }
   if (takeover && close) {
     close.addEventListener("click", function () {
-      takeover.hidden = true;
+      takeover.style.maxHeight = "0px";
+      if (content) content.style.marginTop = "0px";
+      window.setTimeout(function () {
+        takeover.hidden = true;
+      }, 1100);
     });
   }
 
@@ -23,7 +47,7 @@
     first.before(names);
     names.append(first, last);
     var split = document.createElement("div");
-    split.className = "field-row";
+    split.className = "field-row field-row--half";
     email.before(split);
     split.append(email, zip);
     phone.classList.add("field-phone");
