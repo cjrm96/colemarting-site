@@ -26,10 +26,34 @@
     close.addEventListener("click", function () {
       takeover.style.maxHeight = "0px";
       if (content) content.style.marginTop = "0px";
-      window.setTimeout(function () {
-        takeover.hidden = true;
-      }, 1100);
+      window.setTimeout(function () { takeover.hidden = true; }, 1100);
     });
+  }
+
+  var mark = document.getElementById("is-mark");
+  if (mark && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var seenScroll = false;
+    var fullyIn = false;
+    var drawn = false;
+    var obs = new IntersectionObserver(function (entries) {
+      fullyIn = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.99;
+      arm();
+    }, { threshold: [1] });
+    function arm() {
+      if (drawn || !seenScroll || !fullyIn) return;
+      drawn = true;
+      window.setTimeout(function () { mark.classList.add("is-in"); }, 220);
+      window.removeEventListener("scroll", onScroll);
+      obs.disconnect();
+    }
+    function onScroll() {
+      if (window.scrollY > 12) seenScroll = true;
+      arm();
+    }
+    obs.observe(mark);
+    window.addEventListener("scroll", onScroll, { passive: true });
+  } else if (mark) {
+    mark.classList.add("is-in");
   }
 
   function shapeForm() {
@@ -37,11 +61,7 @@
     if (!form || form.dataset.shaped) return Boolean(form);
     var rows = [].slice.call(form.querySelectorAll(".emailoctopus-form-row:not(.emailoctopus-form-row-hp)"));
     if (rows.length < 5) return false;
-    var first = rows[0];
-    var last = rows[1];
-    var email = rows[2];
-    var phone = rows[3];
-    var zip = rows[4];
+    var first = rows[0], last = rows[1], email = rows[2], phone = rows[3], zip = rows[4];
     var names = document.createElement("div");
     names.className = "field-row field-row--half";
     first.before(names);
@@ -51,32 +71,20 @@
     email.before(split);
     split.append(email, zip);
     phone.classList.add("field-phone");
-    [
-      [first, "given-name", "text"],
-      [last, "family-name", "text"],
-      [email, "email", "email"],
-      [phone, "tel", "tel"],
-      [zip, "postal-code", "text"],
-    ].forEach(function (item) {
+    [[first, "given-name", "text"], [last, "family-name", "text"], [email, "email", "email"], [phone, "tel", "tel"], [zip, "postal-code", "text"]].forEach(function (item) {
       var input = item[0].querySelector("input");
       if (!input) return;
       input.setAttribute("autocomplete", item[1]);
       if (item[2] === "tel" || item[2] === "text") input.type = item[2];
       if (item[1] === "tel" || item[1] === "postal-code") input.inputMode = "numeric";
     });
-    var placeholders = {
-      field_1: "First name",
-      field_2: "Last name",
-      field_0: "Email address",
-      field_3: "Mobile number",
-      field_4: "Zip code",
-    };
+    var placeholders = { field_1: "First name", field_2: "Last name", field_0: "Email address", field_3: "Mobile number", field_4: "Zip code" };
     form.querySelectorAll("input[name]").forEach(function (input) {
       if (placeholders[input.name]) input.placeholder = placeholders[input.name];
     });
     var disclaimer = document.querySelector(".signup__disclaimer");
     var btn = form.querySelector('input[type="submit"]');
-    if (btn) btn.value = "Join Our Team";
+    if (btn) btn.value = "Join Our Movement";
     if (disclaimer && btn) btn.before(disclaimer);
     form.dataset.shaped = "1";
     return true;
